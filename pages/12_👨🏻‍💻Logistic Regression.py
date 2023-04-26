@@ -2,19 +2,17 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
-from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from imblearn.over_sampling import SMOTE
-import gc; gc.enable()
 from sklearn.metrics import log_loss
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
-from sklearn.metrics import accuracy_score
-import pandas as pd
 import time
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+import gc; gc.enable()
+
 
 #Display images and titles
 st.image("4.png", output_format="auto")
@@ -58,11 +56,17 @@ st.markdown(f"#### 🎯 The Log Loss of XGBoost Classifier Model for Test Data: 
 
 
 #PLotting Confusion Matrix
-st.title("Confusion Matrix Logistic Regression Model: \n\n")
+st.title("Confusion Matrix of Logistic Regression Classifier Model: \n\n")
 confusion_matrix = confusion_matrix(y_test, test_predicted)
+group_names = ['True Neg','False Pos','False Neg','True Pos']
+group_counts = ["{0:0.0f}".format(value) for value in confusion_matrix.flatten()]
+group_percentages = ["{0:.2%}".format(value) for value in confusion_matrix.flatten()/np.sum(confusion_matrix)]
+labels = [f"{v1}\n{v2}\n{v3}" for v1, v2, v3 in zip(group_names,group_counts,group_percentages)]
+labels = np.asarray(labels).reshape(2,2)
 fig,ax = plt.subplots(1,1)
-sns.heatmap(confusion_matrix/np.sum(confusion_matrix), annot=True, fmt='.2%', cmap='Blues',ax=ax)
+sns.heatmap(confusion_matrix, annot=labels, fmt='', cmap='magma',ax=ax)
 st.pyplot(fig)
+
 
 #save the model
 #model.save_model('LogisticRegression.json')

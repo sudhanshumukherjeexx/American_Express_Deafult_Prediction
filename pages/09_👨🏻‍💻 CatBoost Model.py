@@ -6,13 +6,12 @@ from catboost import CatBoostClassifier, Pool
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from imblearn.over_sampling import SMOTE
-import gc; gc.enable()
 from sklearn.metrics import log_loss
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
-from sklearn.metrics import accuracy_score
-import pandas as pd
 import time
+import gc; gc.enable()
+
 
 #Display images and titles
 st.image("4.png", output_format="auto")
@@ -58,34 +57,34 @@ st.write(model)
 end = time.time()
 st.markdown(f"### 🦾 Model Built and Fitted Succesfully in {end - start} seconds")
 
-# model = CatBoostClassifier(iterations=1000, max_depth=10, learning_rate=0.05, logging_level='Silent')
-# model.fit(X_train, y_train, eval_set=test_pool, use_best_model=True, early_stopping_rounds=1000)
-# end = time.time()
-# st.markdown(f"### 🦾 Model Built and Fitted Succesfully in {end - start} seconds")
-# train_predicted = model.predict(X_train)
-# logloss = log_loss(y_train, model.predict_proba(X_train))
-# f1score = f1_score(y_train, train_predicted, average='micro')
-# st.markdown(f"### 🎯 The F1 score of CatBoost Classifier Model for Train Data: {f1score}")
-# st.markdown(f"### 🎯 The Log Loss of CatBoost Classifier Model for Train Data: {logloss}")
 
 test_predicted = model.predict(X_test)
 logloss = round(log_loss(y_test, model.predict_proba(X_test)),2)
 f1score_t = round(f1_score(y_test, test_predicted, average='micro'),2)
-#accuracy = round(accuracy_score(y_test, test_predicted),2)
 st.markdown(f"#### 🎯 The F1 score of CatBoost Classifier Model for Test Data: {f1score_t}")
 st.markdown(f"#### 🎯 The Log Loss of our CatBoost Classifier Model for Test Data: {logloss}")
-#st.write(f"#### 🎯 The accuracy of CatBoost Classifier Model : {accuracy*100.0}")
 
 
 #PLotting Confusion Matrix
 st.title("Confusion Matrix of CatBoost Classifier Model: \n\n")
 confusion_matrix = confusion_matrix(y_test, test_predicted)
+group_names = ['True Neg','False Pos','False Neg','True Pos']
+group_counts = ["{0:0.0f}".format(value) for value in confusion_matrix.flatten()]
+group_percentages = ["{0:.2%}".format(value) for value in confusion_matrix.flatten()/np.sum(confusion_matrix)]
+labels = [f"{v1}\n{v2}\n{v3}" for v1, v2, v3 in zip(group_names,group_counts,group_percentages)]
+labels = np.asarray(labels).reshape(2,2)
 fig,ax = plt.subplots(1,1)
-sns.heatmap(confusion_matrix/np.sum(confusion_matrix), annot=True, fmt='.2%', cmap='Blues',ax=ax)
+sns.heatmap(confusion_matrix, annot=labels, fmt='', cmap='Blues',ax=ax)
 st.pyplot(fig)
+#sns.heatmap(confusion_matrix, annot=labels, fmt='', cmap='Blues')
+
+
+
+
+
+
 
 #save the model
 model.save_model('CatBoost.json')
 
-st.session_state['model'] = model
 
