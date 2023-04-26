@@ -29,9 +29,9 @@ This repository based on American Express Default Prediction which is part of my
                 06_🕴 Distribution R (Risk) Variable.py : You can view all the details related to Risk variable on this page.
                 07_🏂🏼 Distribution D (Deliquency) Variable.py : You can view all the details related to Deliquency variable on this page.
                 08_📊 Distribution of Categorical Variable.py : You can view all the details related to Categorical variable on this page.
-                09_👨🏻‍💻 CatBoost Model.py - You can view all the details of CatBoost Classifier Model on this page including Model Performance and Stats. When you visit                 this page model is live fetched in background.
-                11_👨🏻‍💻 XgBoost Model.py - You can view all the details of XGBoost Classifier Model on this page including Model Performance and Stats. When you visit                   this page model is live fetched in background.
-                12_👨🏻‍💻Logistic Regression.py - You can view all the details of Logistic Regression Model on this page including Model Performance and Stats. When you                   visit this page model is live fetched in background.
+                09_👨🏻‍💻 CatBoost Model.py - You can view all the details of CatBoost Classifier Model on this page including Model Performance and Stats. When you visit this page model is live fetched in background.
+                11_👨🏻‍💻 XgBoost Model.py - You can view all the details of XGBoost Classifier Model on this page including Model Performance and Stats. When you visit this page model is live fetched in background.
+                12_👨🏻‍💻Logistic Regression.py - You can view all the details of Logistic Regression Model on this page including Model Performance and Stats. When you visit this page model is live fetched in background.
                 13_🕵🏻‍♂️Test our Model.py - You can test our models on this page. This page has slider to select features, intial value is set to the minimum value                       present in the feature.
                 
 - CatBoost.json : CatBoost Classifier Model is saved in the .JSON format in this file. 
