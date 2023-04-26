@@ -19,6 +19,8 @@ This repository based on American Express Default Prediction which is part of my
 - app.py : This file contains the code which intializes the Dataset, Handles Missing Values, extarct 100,000 rows and Creates a data state and make it accessible for a user for further analysis.
 
 - Pages - This folder contains all code for differet pages available in our python GUI.
+
+
                 01_🤖 Data Stats.py : You can visit this page to check all the Data Statistics related to our Dataset.
                 02_👻 Exploratory Data Analysis.py : To view visualized details of our model, please visit this page.
                 03_🥷 Distribution S (Spend) Variable.py : You can view all the details related to Spend variable on this page.
